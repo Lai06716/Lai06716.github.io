@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>解夢App</title>
+    <style>
+        /* 全局樣式 */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo h1 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        /* 夢境記錄區 */
+        #dream-log {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #dream-log h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* 夢境解析區 */
+        #dream-analysis {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #dream-analysis h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        #analysis-result {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* 社區討論區 */
+        #community {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #community h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        #community-posts {
+            margin-bottom: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 頁面標頭 -->
+    <header>
+        <div class="logo">
+            <h1>解夢App</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#dream-log">夢境記錄</a></li>
+                <li><a href="#dream-analysis">夢境解析</a></li>
+                <li><a href="#community">社區</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 主要內容區 -->
+    <main>
+        <!-- 夢境記錄區 -->
+        <section id="dream-log">
+            <h2>記錄你的夢境</h2>
+            <form id="dream-form">
+                <textarea id="dream-description" placeholder="請描述你的夢境..." rows="6"></textarea>
+                <button type="submit">保存夢境</button>
+            </form>
+        </section>
+
+        <!-- 夢境解析區 -->
+        <section id="dream-analysis">
+            <h2>夢境解析</h2>
+            <form id="analysis-form">
+                <input type="text" id="dream-keyword" placeholder="輸入關鍵字解析夢境" />
+                <button type="submit">開始解析</button>
+            </form>
+            <div id="analysis-result">
+                <!-- 夢境解析結果顯示區 -->
+                <p>夢境解析將顯示在這裡。</p>
+            </div>
+        </section>
+
+        <!-- 社區討論區 -->
+        <section id="community">
+            <h2>夢境解讀社區</h2>
+            <div id="community-posts">
+                <p>這裡顯示社區成員的夢境分享。</p>
+            </div>
+            <form id="post-form">
+                <textarea id="community-post" placeholder="分享你的夢境解釋或故事..." rows="4"></textarea>
+                <button type="submit">發佈</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- 頁腳 -->
+    <footer>
+        <p>&copy; 2024 解夢App. 保留所有權利。</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            // 夢境記錄表單提交事件
+            document.getElementById("dream-form").addEventListener("submit", function (e) {
+                e.preventDefault();
+                let dreamDescription = document.getElementById("dream-description").value;
+                if (dreamDescription) {
+                    alert("夢境已保存: " + dreamDescription);
+                    document.getElementById("dream-description").value = ""; // 清空文本框
+                } else {
+                    alert("請描述你的夢境！");
+                }
+            });
+
+            // 夢境解析表單提交事件
+            document.getElementById("analysis-form").addEventListener("submit", function (e) {
+                e.preventDefault();
+                let keyword = document.getElementById("dream-keyword").value;
+                if (keyword) {
+                    document.getElementById("analysis-result").innerHTML = `解析結果：夢境中有關「${keyword}」的象徵是...`;
+                } else {
+                    alert("請輸入關鍵字進行解析！");
+                }
+            });
+
+            // 社區發佈表單提交事件
+            document.getElementById("post-form").addEventListener("submit", function (e) {
+                e.preventDefault();
+                let communityPost = document.getElementById("community-post").value;
+                if (communityPost) {
+                    alert("你已成功發佈夢境解讀！");
+                    document.getElementById("community-post").value = ""; // 清空文本框
+                } else {
+                    alert("請分享你的夢境解讀！");
+                }
+            });
+
+        });
+    </script>
+
+</body>
+</html>
